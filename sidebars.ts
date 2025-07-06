@@ -22,6 +22,26 @@ const sidebars: SidebarsConfig = {
         'GitHub-Codespace',
       ],
     },
+    {
+      type: 'category',
+      label: 'The Basic move programming',
+      items: [
+        'data-types',
+        'functions',
+        'structs',
+        'abilities',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Object programming',
+      items: [
+        'object-centric-model',
+        'capability-pattern',
+        'dynamic-fields',
+        'one-time-witness',
+      ],
+    },
   ],
 };
 
