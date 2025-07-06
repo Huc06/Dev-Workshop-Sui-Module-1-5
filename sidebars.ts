@@ -14,8 +14,14 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
-    'nlp-in-coding',
-    'GitHub-Codespace',
+    {
+      type: 'category',
+      label: 'Say Hello Move',
+      items: [
+        'nlp-in-coding',
+        'GitHub-Codespace',
+      ],
+    },
   ],
 };
 

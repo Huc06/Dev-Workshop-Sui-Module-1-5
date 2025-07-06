@@ -163,7 +163,70 @@ cd firts_project
     BUILDING hello_world
     ```
 
-![Kết quả build thành công minh hoạ](/img/step6-5.png)
+    ![Kết quả build thành công minh hoạ](/img/step6-5.png)
+
+### Tạo ví và môi trường testnet
+
+```bash
+sui client new-env --alias testnet --rpc https://fullnode.testnet.sui.io:443
+```
+Nhập `y` khi được hỏi kết nối với Sui node. Sau đó chọn key kiểu `0` (ed25519).
+> **Lưu ý:** Bạn cũng sẽ được hỏi để nhập URL cho môi trường testnet, hãy nhập `https://fullnode.testnet.sui.io:443` nếu cần.
+
+![Kết quả tạo ví và môi trường testnet](/img/step6-6.png)
+
+### Thêm 1 address mới
+
+```bash
+sui client new-address <scheme>
+```
+Ví dụ:
+
+```bash
+sui client new-address ed25519
+```
+> **Tip:** Bạn có thể nhập `recoveryPhrase` (cụm từ khôi phục) vào ví Slush hoặc các ví khác để sử dụng địa chỉ này trên giao diện ví.
+
+![Kết quả tạo thêm ví khác](/img/step6-7.png)
+
+> **Lưu ý:** Nếu bạn đã tạo và có hơn 2 ví, bạn có thể chuyển sang ví khác tùy theo nhu cầu sử dụng bằng lệnh `sui client switch --address <địa_chỉ_ví_của_bạn>`
+
+Ví dụ: `sui client switch --address 0x0a7b8caa26fb1c7c3b84c1f8dd51d8416b232c3e7e48b5eb0254ed2a83170c79`
+
+### Faucet coins cho address
+
+Để nhận SUI token testnet miễn phí cho địa chỉ ví của bạn:
+1. Truy cập [Discord của Sui](https://discord.com/invite/sui).
+2. Vào kênh `testnet-faucet`.
+3. Nhập lệnh theo cú pháp:
+   ```
+   !faucet <địa_chỉ_ví_của_bạn>
+   ```
+   Ví dụ:
+   ```
+   !faucet 0x0a7b8caa26fb1c7c3b84c1f8dd51d8416b232c3e7e48b5eb0254ed2a83170c79
+   ```
+   Thay `<địa_chỉ_ví_của_bạn>` bằng địa chỉ ví Sui bạn muốn nhận coin.
+
+![Hướng dẫn Faucet coins](/img/step6-10.png)
+
+### Kiểm tra số dư
+
+```bash
+sui client balance
+```
+
+![Kết quả kiểm tra số dư](/img/step6-8.png)
+
+### Publish Module
+
+```bash
+sui client publish --gas-budget 100000000
+```
+
+---
+
+![Kết quả build thành công minh hoạ](/img/step6-9.png)
 
 ---
 
@@ -257,6 +320,13 @@ To https://github.com/<your_username>/<your_repo>
 
 ```bash
 exit
+```
+
+**Nếu đã thoát container và muốn vào lại:**
+
+```bash
+docker start suidevcontainer
+docker exec -it suidevcontainer bash
 ```
 
 ---
