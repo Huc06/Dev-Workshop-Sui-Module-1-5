@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'The Basic move programming',
       items: [
+        'debugging',
         'data-types',
         'functions',
         'structs',
@@ -40,6 +41,13 @@ const sidebars: SidebarsConfig = {
         'capability-pattern',
         'dynamic-fields',
         'one-time-witness',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Challenge yourself',
+      items: [
+        'my-nft-collection',
       ],
     },
   ],
