@@ -25,77 +25,41 @@ module nft::my_nft_collection {
     use sui::event::emit;
     use sui::transfer;
     use sui::table::{Table, add, borrow, length, new as new_table};
-    use 0x1::string::String;
+    use std::string::String;
 
-    struct SelfIntroductionNFT has key, store {
-        id: UID,
-        name: String,
-        description: String,
-        image_url: String,
-        slogan: String,
-    }
-
+    /// NFT rút gọn với 4 trường cơ bản
     struct MemoryNFT has key, store {
         id: UID,
-        event_name: String,
-        date: u64,
-        location: String,
+        name: String,
         description: String,
         image_url: String,
         rarity: u8,
     }
 
+    /// Mẫu dữ liệu để tạo NFT
+    struct MemoryTemplate has store {
+        name: String,
+        description: String,
+        image_url: String,
+        rarity: u8,
+    }
+
+    /// Object lưu trữ danh sách mẫu NFT
     struct MemoryTemplateStore has key, store {
         id: UID,
         templates: Table<u64, MemoryTemplate>,
         next_template_id: u64,
     }
 
-    struct MemoryTemplate has store {
-        event_name: String,
-        date: u64,
-        location: String,
-        description: String,
-        image_url: String,
-        rarity: u8,
-    }
-
-    struct SelfIntroductionNFTCreated has copy, drop {
-        nft_id: address,
-        creator: address,
-        name: String,
-    }
-
+    /// Event khi tạo NFT
     struct MemoryNFTCreated has copy, drop {
         nft_id: address,
         creator: address,
-        event_name: String,
+        name: String,
         rarity: u8,
     }
 
-    public entry fun mint_self_introduction_nft(
-        name: String,
-        description: String,
-        image_url: String,
-        slogan: String,
-        ctx: &mut TxContext
-    ) {
-        let sender_addr = sender(ctx);
-        let self_intro_nft = SelfIntroductionNFT {
-            id: new(ctx),
-            name,
-            description,
-            image_url,
-            slogan,
-        };
-        emit(SelfIntroductionNFTCreated {
-            nft_id: id_to_address(&object_id(&self_intro_nft)),
-            creator: sender_addr,
-            name: self_intro_nft.name,
-        });
-        transfer::transfer(self_intro_nft, sender_addr);
-    }
-
+    /// Mint NFT từ template ngẫu nhiên
     public entry fun mint_random_memory_nft(
         store: &MemoryTemplateStore,
         ctx: &mut TxContext
@@ -103,32 +67,33 @@ module nft::my_nft_collection {
         let sender_addr = sender(ctx);
         let num_templates = length(&store.templates);
         assert!(num_templates > 0, 1001);
+
         let seed = epoch_timestamp_ms(ctx);
         let idx = seed % num_templates;
         let template = borrow(&store.templates, idx);
+
         let nft = MemoryNFT {
             id: new(ctx),
-            event_name: template.event_name,
-            date: template.date,
-            location: template.location,
+            name: template.name,
             description: template.description,
             image_url: template.image_url,
             rarity: template.rarity,
         };
+
         emit(MemoryNFTCreated {
             nft_id: id_to_address(&object_id(&nft)),
             creator: sender_addr,
-            event_name: nft.event_name,
+            name: nft.name,
             rarity: nft.rarity,
         });
+
         transfer::transfer(nft, sender_addr);
     }
 
+    /// Thêm template mới
     public entry fun add_memory_template(
         store: &mut MemoryTemplateStore,
-        event_name: String,
-        date: u64,
-        location: String,
+        name: String,
         description: String,
         image_url: String,
         rarity: u8,
@@ -137,15 +102,14 @@ module nft::my_nft_collection {
         let new_template_id = store.next_template_id;
         store.next_template_id = store.next_template_id + 1;
         add(&mut store.templates, new_template_id, MemoryTemplate {
-            event_name,
-            date,
-            location,
+            name,
             description,
             image_url,
             rarity,
         });
     }
 
+    /// Khởi tạo object lưu templates
     fun init(ctx: &mut TxContext) {
         transfer::share_object(MemoryTemplateStore {
             id: new(ctx),
@@ -154,6 +118,75 @@ module nft::my_nft_collection {
         });
     }
 }
+
+## 2.1 Cấu trúc của MemoryNFT
+
+NFT kỷ niệm (MemoryNFT) được định nghĩa với các trường cơ bản sau:
+
+```move
+struct MemoryNFT has key, store {
+    id: UID,
+    name: String,
+    description: String,
+    image_url: String,
+    rarity: u8,
+}
+```
+
+- `id`: Định danh duy nhất cho mỗi NFT, là một `UID` (Unique ID) được Sui cấp.
+- `name`: Tên của sự kiện hoặc kỷ niệm mà NFT này đại diện.
+- `description`: Mô tả chi tiết về sự kiện hoặc kỷ niệm.
+- `image_url`: URL của hình ảnh đại diện cho NFT.
+- `rarity`: Độ hiếm của NFT, có thể là một số nguyên từ 1-5 (ví dụ: 1-Phổ biến, 5-Huyền thoại).
+
+## 2.2 Cấu trúc của MemoryTemplate
+
+`MemoryTemplate` là một cấu trúc dữ liệu dùng để lưu trữ thông tin của các mẫu NFT kỷ niệm. Các mẫu này sẽ được sử dụng để đúc ra các `MemoryNFT` ngẫu nhiên.
+
+```move
+struct MemoryTemplate has store {
+    name: String,
+    description: String,
+    image_url: String,
+    rarity: u8,
+}
+```
+
+Các trường của `MemoryTemplate` tương tự như `MemoryNFT` nhưng không có `id` vì nó chỉ là một mẫu, không phải là một đối tượng NFT có thể chuyển nhượng.
+
+## 2.3 Cấu trúc của MemoryTemplateStore
+
+`MemoryTemplateStore` là một Shared Object (đối tượng chia sẻ) dùng để lưu trữ tất cả các `MemoryTemplate`.
+
+```move
+struct MemoryTemplateStore has key, store {
+    id: UID,
+    templates: Table<u64, MemoryTemplate>,
+    next_template_id: u64,
+}
+```
+
+- `id`: Định danh duy nhất cho `MemoryTemplateStore`.
+- `templates`: Một `Table` (bảng) dùng để lưu trữ các `MemoryTemplate`, với khóa là `u64` (định danh của template) và giá trị là `MemoryTemplate`.
+- `next_template_id`: Một bộ đếm để gán ID duy nhất cho mỗi `MemoryTemplate` mới được thêm vào.
+
+## 2.4 Event: MemoryNFTCreated
+
+Khi một `MemoryNFT` được tạo ra, một sự kiện `MemoryNFTCreated` sẽ được phát ra. Điều này giúp các ứng dụng khác theo dõi và phản ứng với việc tạo NFT.
+
+```move
+struct MemoryNFTCreated has copy, drop {
+    nft_id: address,
+    creator: address,
+    name: String,
+    rarity: u8,
+}
+```
+
+- `nft_id`: Địa chỉ của NFT vừa được tạo.
+- `creator`: Địa chỉ của người đã tạo ra NFT.
+- `name`: Tên của NFT.
+- `rarity`: Độ hiếm của NFT.
 
 ## 4. Hàm mint MemoryNFT ngẫu nhiên
 
@@ -216,7 +249,7 @@ sui client call \
   --package <PACKAGE_ID> \
   --module my_nft_collection \
   --function add_memory_template \
-  --args <MemoryTemplateStore_OBJECT_ID> "<Tên sự kiện>" <Timestamp> "<Địa điểm>" "<Mô tả>" "<URL hình ảnh>" <Rarity> \
+  --args <MemoryTemplateStore_OBJECT_ID> "<Tên của sự kiện>" "<Mô tả>" "<URL hình ảnh>" <Rarity> \
   --gas-budget 1000000
 ```
 
@@ -227,44 +260,20 @@ sui client call \
   --package 0x489563cb7a99e87528b871f6f5df62100e96374d7cfc9432af7907f119049151 \
   --module my_nft_collection \
   --function add_memory_template \
-  --args 0x0b8391f4a847b3c9b1ec9a4820939906c8520714dcf5f1b4b503f8ab3c33f4c0 "Kỷ niệm gặp gỡ" 1678886400 "Hà Nội" "Lần đầu tiên chúng ta gặp nhau" "https://example.com/meet.png" 3 \
+  --args 0x0b8391f4a847b3c9b1ec9a4820939906c8520714dcf5f1b4b503f8ab3c33f4c0 "Kỷ niệm gặp gỡ" "Lần đầu tiên chúng ta gặp nhau" "https://example.com/meet.png" 3 \
   --gas-budget 1000000
 
 sui client call \
   --package 0x489563cb7a99e87528b871f6f5df62100e96374d7cfc9432af7907f119049151 \
   --module my_nft_collection \
   --function add_memory_template \
-  --args 0x0b8391f4a847b3c9b1ec9a4820939906c8520714dcf5f1b4b503f8ab3c33f4c0 "Chuyến đi biển" 1689043200 "Đà Nẵng" "Một chuyến đi biển đầy nắng và gió" "https://example.com/beach.png" 2 \
+  --args 0x0b8391f4a847b3c9b1ec9a4820939906c8520714dcf5f1b4b503f8ab3c33f4c0 "Chuyến đi biển" "Một chuyến đi biển đầy nắng và gió" "https://example.com/beach.png" 2 \
   --gas-budget 1000000
 ```
 
 Bạn có thể gọi lệnh này nhiều lần để thêm nhiều mẫu kỷ niệm khác nhau.
 
-### Bước 4: Mint NFT Giới thiệu bản thân (Mint Self-Introduction NFT)
-
-Chỉ cần gọi hàm này một lần để tạo NFT giới thiệu bản thân độc nhất của bạn.
-
-```bash
-sui client call \
-  --package <PACKAGE_ID> \
-  --module my_nft_collection \
-  --function mint_self_introduction_nft \
-  --args "<Tên của bạn>" "<Mô tả ngắn gọn>" "<URL hình ảnh>" "<Câu khẩu hiệu>" \
-  --gas-budget 1000000
-```
-
-**Ví dụ:**
-
-```bash
-sui client call \
-  --package 0x489563cb7a99e87528b871f6f5df62100e96374d7cfc9432af7907f119049151 \
-  --module my_nft_collection \
-  --function mint_self_introduction_nft \
-  --args "Nguyễn Văn A" "Một nhà phát triển blockchain đam mê" "https://example.com/avatar.png" "Code for a better future" \
-  --gas-budget 1000000
-```
-
-### Bước 5: Mint NFT Kỷ niệm ngẫu nhiên (Mint Random Memory NFT)
+### Bước 4: Mint NFT Kỷ niệm ngẫu nhiên (Mint Random Memory NFT)
 
 Bất kỳ người dùng nào cũng có thể gọi hàm này để mint một NFT kỷ niệm ngẫu nhiên từ các mẫu bạn đã cung cấp.
 
