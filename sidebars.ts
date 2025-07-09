@@ -29,8 +29,9 @@ const sidebars: SidebarsConfig = {
         'debugging',
         'data-types',
         'functions',
-        'structs',
         'abilities',
+        'structs',
+        'UID, ID và Address',
       ],
     },
     {
