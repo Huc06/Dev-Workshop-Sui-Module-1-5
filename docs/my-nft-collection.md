@@ -382,5 +382,4 @@ module nft::my_nft_collection {
             next_template_id: 0,
         });
     }
-}
-```
+}```
