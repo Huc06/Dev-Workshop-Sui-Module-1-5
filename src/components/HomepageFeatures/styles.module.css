@@ -3,9 +3,64 @@
   align-items: center;
   padding: 2rem 0;
   width: 100%;
+  background-color: var(--ifm-background-color);
 }
 
 .featureSvg {
   height: 200px;
   width: 200px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.featureSvg:hover {
+  transform: scale(1.05);
+}
+
+.features .col {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid rgba(192, 230, 255, 0.3);
+}
+
+.features .col:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(1, 24, 41, 0.15);
+  border-color: #4DA2FF;
+}
+
+.features h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #011829;
+}
+
+.features p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(1, 24, 41, 0.8);
+}
+
+/* Dark mode specific improvements */
+[data-theme='dark'] .features .col {
+  background-color: #011829;
+  border: 1px solid rgba(77, 162, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .features .col:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  border-color: #4DA2FF;
+}
+
+[data-theme='dark'] .features h3 {
+  color: #C0E6FF;
+}
+
+[data-theme='dark'] .features p {
+  color: rgba(192, 230, 255, 0.8);
 }

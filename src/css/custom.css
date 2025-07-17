@@ -6,6 +6,14 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  /* Official Sui Brand Colors from Media Kit */
+  --sui-sea: #4DA2FF;
+  --sui-ocean: #011829;
+  --sui-aqua: #C0E6FF;
+  --sui-deep-ocean: #030F1C;
+  --sui-cloud: #FFFFFF;
+
+  /* Primary color palette based on Sui Sea */
   --ifm-color-primary: #4DA2FF;
   --ifm-color-primary-dark: #2E8FFF;
   --ifm-color-primary-darker: #1A7CFF;
@@ -13,20 +21,321 @@
   --ifm-color-primary-light: #66B5FF;
   --ifm-color-primary-lighter: #80C8FF;
   --ifm-color-primary-lightest: #C0E6FF;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(192, 230, 255, 0.3);
+
+  /* Background Colors */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-card-background-color: #ffffff;
+
+  /* Typography */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.6;
+  --ifm-heading-font-weight: 600;
+
+  /* Code */
+  --ifm-code-font-size: 14px;
+  --ifm-code-background: #f6f8fa;
+  --ifm-code-border-radius: 6px;
+  --ifm-code-padding-horizontal: 0.4rem;
+  --ifm-code-padding-vertical: 0.2rem;
+
+  /* Navbar */
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.95);
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(1, 24, 41, 0.1);
+  --ifm-navbar-height: 4rem;
+
+  /* Sidebar */
+  --ifm-menu-color: var(--sui-ocean);
+  --ifm-menu-color-active: var(--sui-sea);
+  --ifm-menu-link-padding-horizontal: 1rem;
+  --ifm-menu-link-padding-vertical: 0.5rem;
+
+  /* Content */
+  --ifm-spacing-horizontal: 1.5rem;
+  --ifm-global-radius: 8px;
+
+  /* Highlighted code lines */
+  --docusaurus-highlighted-code-line-bg: rgba(77, 162, 255, 0.1);
+
+  /* Custom theme variables using Sui colors */
+  --sui-hero-gradient-start: var(--sui-sea);
+  --sui-hero-gradient-end: var(--sui-ocean);
+  --sui-shadow-light: rgba(1, 24, 41, 0.1);
+  --sui-shadow-medium: rgba(1, 24, 41, 0.15);
+  --sui-shadow-heavy: rgba(1, 24, 41, 0.2);
+  --sui-border-color: var(--ifm-color-emphasis-200);
+  --sui-text-muted: var(--ifm-color-emphasis-700);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
+  /* Sui Brand Colors for Dark Mode - using official colors */
   --ifm-color-primary: #4DA2FF;
   --ifm-color-primary-dark: #2E8FFF;
   --ifm-color-primary-darker: #1A7CFF;
-  --ifm-color-primary-darkest: #0066E6;
+  --ifm-color-primary-darkest: #66B5FF;
   --ifm-color-primary-light: #66B5FF;
   --ifm-color-primary-lighter: #80C8FF;
-  --ifm-color-primary-lightest: #C0E6FF;
-  --docusaurus-highlighted-code-line-bg: rgba(77, 162, 255, 0.3);
-  --ifm-background-color: #011829;
-  --ifm-background-surface-color: #030F1C;
+  --ifm-color-primary-lightest: rgba(192, 230, 255, 0.2);
+
+  /* Dark Background Colors using Sui Deep Ocean and Ocean */
+  --ifm-background-color: var(--sui-deep-ocean);
+  --ifm-background-surface-color: var(--sui-ocean);
+  --ifm-card-background-color: var(--sui-ocean);
+
+  /* Dark Mode Typography */
+  --ifm-color-content: var(--sui-aqua);
+  --ifm-color-content-secondary: rgba(192, 230, 255, 0.7);
+
+  /* Dark Mode Code */
+  --ifm-code-background: rgba(1, 24, 41, 0.8);
+
+  /* Dark Mode Navbar */
+  --ifm-navbar-background-color: rgba(3, 15, 28, 0.95);
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(192, 230, 255, 0.1);
+
+  /* Dark Mode Sidebar */
+  --ifm-menu-color: var(--sui-aqua);
+  --ifm-menu-color-active: var(--sui-sea);
+
+  /* Dark Mode Highlighted code lines */
+  --docusaurus-highlighted-code-line-bg: rgba(77, 162, 255, 0.2);
+
+  /* Custom dark theme variables using Sui colors */
+  --sui-hero-gradient-start: var(--sui-ocean);
+  --sui-hero-gradient-end: var(--sui-deep-ocean);
+  --sui-shadow-light: rgba(0, 0, 0, 0.3);
+  --sui-shadow-medium: rgba(0, 0, 0, 0.4);
+  --sui-shadow-heavy: rgba(0, 0, 0, 0.5);
+  --sui-border-color: rgba(192, 230, 255, 0.2);
+  --sui-text-muted: rgba(192, 230, 255, 0.6);
+}
+
+/* Custom styles inspired by Sui Documentation */
+
+/* Improve navbar styling */
+.navbar {
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--sui-border-color);
+}
+
+.navbar__title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--sui-ocean);
+}
+
+[data-theme='dark'] .navbar__title {
+  color: var(--sui-aqua);
+}
+
+/* Improve sidebar styling */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--sui-border-color);
+}
+
+.menu__link {
+  border-radius: var(--ifm-global-radius);
+  margin: 0.125rem 0;
+  transition: all 0.2s ease;
+}
+
+.menu__link:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  transform: translateX(2px);
+}
+
+.menu__link--active {
+  background-color: var(--sui-aqua);
+  color: var(--sui-ocean);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .menu__link--active {
+  background-color: rgba(77, 162, 255, 0.2);
+  color: var(--sui-sea);
+}
+
+/* Improve content styling */
+.markdown>h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--sui-sea) 0%, var(--sui-ocean) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='dark'] .markdown>h1 {
+  background: linear-gradient(135deg, var(--sui-sea) 0%, var(--sui-aqua) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.markdown>h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--sui-ocean);
+}
+
+[data-theme='dark'] .markdown>h2 {
+  color: var(--sui-aqua);
+}
+
+.markdown>h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Code blocks styling */
+.prism-code {
+  border-radius: var(--ifm-global-radius);
+  font-size: var(--ifm-code-font-size);
+}
+
+/* Inline code styling */
+code {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  font-weight: 500;
+}
+
+/* Blockquote styling with Sui colors */
+blockquote {
+  border-left: 4px solid var(--sui-sea);
+  background-color: var(--sui-aqua);
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--ifm-global-radius) var(--ifm-global-radius) 0;
+}
+
+[data-theme='dark'] blockquote {
+  background-color: rgba(77, 162, 255, 0.1);
+  color: var(--sui-aqua);
+}
+
+/* Table styling */
+table {
+  border-radius: var(--ifm-global-radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 var(--sui-shadow-light);
+}
+
+/* Button styling */
+.button {
+  border-radius: var(--ifm-global-radius);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--sui-shadow-medium);
+}
+
+.button--primary {
+  background-color: var(--sui-sea);
+  border-color: var(--sui-sea);
+}
+
+.button--primary:hover {
+  background-color: var(--sui-ocean);
+  border-color: var(--sui-ocean);
+}
+
+/* Admonition styling */
+.alert {
+  border-radius: var(--ifm-global-radius);
+  border-left-width: 4px;
+}
+
+.alert--info {
+  border-left-color: var(--sui-sea);
+}
+
+/* Footer styling */
+.footer {
+  border-top: 1px solid var(--sui-border-color);
+  background-color: var(--ifm-background-surface-color);
+}
+
+/* Pagination styling */
+.pagination-nav__link {
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  transition: all 0.2s ease;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--sui-sea);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--sui-shadow-light);
+}
+
+/* Card styling for better theme support */
+.card {
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid var(--sui-border-color);
+  box-shadow: 0 2px 8px var(--sui-shadow-light);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 25px var(--sui-shadow-medium);
+  transform: translateY(-2px);
+  border-color: var(--sui-sea);
+}
+
+/* Search input styling */
+.navbar__search-input {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--sui-border-color);
+  color: var(--ifm-color-content);
+}
+
+.navbar__search-input:focus {
+  border-color: var(--sui-sea);
+  box-shadow: 0 0 0 2px rgba(77, 162, 255, 0.2);
+}
+
+/* Improve text contrast */
+.text--secondary {
+  color: var(--sui-text-muted) !important;
+}
+
+/* Hero section improvements */
+.hero {
+  background: linear-gradient(135deg, var(--sui-hero-gradient-start) 0%, var(--sui-hero-gradient-end) 100%);
+}
+
+/* Dark mode specific improvements */
+[data-theme='dark'] {
+
+  /* Improve code block visibility */
+  .prism-code {
+    background-color: rgba(1, 24, 41, 0.6);
+    border: 1px solid var(--sui-border-color);
+  }
+
+  /* Improve table styling in dark mode */
+  .table-of-contents__link {
+    color: var(--ifm-color-content-secondary);
+  }
+
+  .table-of-contents__link:hover,
+  .table-of-contents__link--active {
+    color: var(--sui-sea);
+  }
+
+  /* Improve dropdown menu styling */
+  .dropdown__menu {
+    background-color: var(--ifm-background-surface-color);
+    border: 1px solid var(--sui-border-color);
+    box-shadow: 0 8px 25px var(--sui-shadow-heavy);
+  }
 }

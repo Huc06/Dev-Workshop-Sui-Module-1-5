@@ -8,16 +8,133 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: #4DA2FF;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroBanner .hero__title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 4px rgba(1, 24, 41, 0.6);
+}
+
+.heroBanner .hero__subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #C0E6FF;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2rem;
+}
+
+.buttons .button {
+  margin: 0 0.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(1, 24, 41, 0.3);
+}
+
+.buttons .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(1, 24, 41, 0.4);
+}
+
+.buttons .button--primary {
+  background-color: #FFFFFF;
+  color: #011829;
+  border-color: #FFFFFF;
+}
+
+.buttons .button--primary:hover {
+  background-color: #C0E6FF;
+  color: #011829;
+  border-color: #C0E6FF;
+}
+
+.buttons .button--secondary {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 2px solid #C0E6FF;
+}
+
+.buttons .button--secondary:hover {
+  background-color: #C0E6FF;
+  color: #011829;
+  border-color: #C0E6FF;
+}
+
+/* Dark mode specific adjustments */
+[data-theme='dark'] .heroBanner {
+  background: #4DA2FF;
+}
+
+[data-theme='dark'] .heroBanner .hero__title {
+  color: #C0E6FF;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme='dark'] .heroBanner .hero__subtitle {
+  color: rgba(192, 230, 255, 0.8);
+}
+
+[data-theme='dark'] .buttons .button {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme='dark'] .buttons .button:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme='dark'] .buttons .button--primary {
+  background-color: #4DA2FF;
+  color: #FFFFFF;
+  border-color: #4DA2FF;
+}
+
+[data-theme='dark'] .buttons .button--primary:hover {
+  background-color: #C0E6FF;
+  color: #011829;
+  border-color: #C0E6FF;
+}
+
+[data-theme='dark'] .buttons .button--secondary {
+  background-color: transparent;
+  color: #C0E6FF;
+  border: 2px solid #4DA2FF;
+}
+
+[data-theme='dark'] .buttons .button--secondary:hover {
+  background-color: #4DA2FF;
+  color: #FFFFFF;
+  border-color: #4DA2FF;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem 0;
+  }
+
+  .heroBanner .hero__title {
+    font-size: 2.5rem;
+  }
+
+  .heroBanner .hero__subtitle {
+    font-size: 1.1rem;
+  }
+
+  .buttons .button {
+    font-size: 1rem;
+    padding: 0.6rem 1.5rem;
+  }
 }
