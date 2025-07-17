@@ -9,17 +9,19 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'category',
-            label: 'Setup & Development',
+            label: 'Cơ bản',
             items: [
-                'GitHub-Codespace',
-                'testing-deployment',
+                'sui-sdk-basics',
+                'wallet-integration',
+                'react-components',
             ],
         },
         {
             type: 'category',
-            label: 'Projects',
+            label: 'Development & Deployment',
             items: [
-                'my-nft-collection',
+                'frontend-setup',
+                'frontend-deployment',
             ],
         },
     ],

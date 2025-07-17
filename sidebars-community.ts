@@ -14,6 +14,13 @@ const sidebars: SidebarsConfig = {
                 'nlp-in-coding',
             ],
         },
+        {
+            type: 'category',
+            label: 'Development Guidelines',
+            items: [
+                'best-practices',
+            ],
+        },
     ],
 };
 

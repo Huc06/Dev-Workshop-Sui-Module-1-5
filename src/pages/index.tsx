@@ -21,12 +21,44 @@ function HomepageHeader() {
           Học cách xây dựng ứng dụng phi tập trung trên Sui Network với Move
           language
         </p>
-        <div className={styles.buttons}>
+
+        {/* Learning Path Section */}
+        <div className={styles.learningPath}>
+          <h3>🚀 Bắt đầu hành trình của bạn:</h3>
+          <div className={styles.pathButtons}>
+            <Link
+              className="button button--secondary button--lg margin--sm"
+              to="/sui-blockchain/intro"
+            >
+              📚 1. Tìm hiểu Sui Blockchain
+            </Link>
+            <Link
+              className="button button--secondary button--lg margin--sm"
+              to="/move-language/intro"
+            >
+              ⚡ 2. Học Move Language
+            </Link>
+            <Link
+              className="button button--secondary button--lg margin--sm"
+              to="/web3-frontend/intro"
+            >
+              🌐 3. Xây dựng Frontend
+            </Link>
+            <Link
+              className="button button--secondary button--lg margin--sm"
+              to="/community/intro"
+            >
+              👥 4. Tham gia Community
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.quickActions}>
           <Link
-            className="button button--secondary button--lg"
-            to="/sui-blockchain/intro"
+            className="button button--primary button--lg"
+            to="/move-language/hello_world.move"
           >
-            Bắt đầu học ngay
+            Viết code đầu tiên ngay! 💻
           </Link>
         </div>
       </div>

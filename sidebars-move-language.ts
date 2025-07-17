@@ -12,17 +12,40 @@ const sidebars: SidebarsConfig = {
             label: 'Cơ bản',
             items: [
                 'hello_world.move',
+                'data-types',
                 'structs',
                 'functions',
-                'data-types',
             ],
         },
         {
             type: 'category',
-            label: 'Nâng cao',
+            label: 'Hệ thống Type',
             items: [
+                'abilities',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'Patterns & Best Practices',
+            items: [
+                'one-time-witness',
                 'capability-pattern',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'Development',
+            items: [
+                'GitHub-Codespace',
                 'debugging',
+                'testing-deployment',
+            ],
+        },
+        {
+            type: 'category',
+            label: 'Projects',
+            items: [
+                'my-nft-collection',
             ],
         },
     ],

@@ -16,14 +16,6 @@ const sidebars: SidebarsConfig = {
                 'dynamic-fields',
             ],
         },
-        {
-            type: 'category',
-            label: 'Hệ thống Type',
-            items: [
-                'abilities',
-                'one-time-witness',
-            ],
-        },
     ],
 };
 
