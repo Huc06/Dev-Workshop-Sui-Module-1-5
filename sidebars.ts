@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -14,39 +14,54 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
+    'introduction',
     {
       type: 'category',
-      label: 'Say Hello Move',
+      label: '🚀 Bắt đầu với Sui Move',
       items: [
         'nlp-in-coding',
         'GitHub-Codespace',
+        'hello_world.move',
       ],
     },
     {
       type: 'category',
-      label: 'The Basic move programming',
+      label: '📚 Kiến thức cơ bản Move',
       items: [
-        'debugging',
         'data-types',
         'functions',
-        'abilities',
         'structs',
-        'UID, ID và Address',
+        'abilities',
+        'debugging',
       ],
     },
     {
       type: 'category',
-      label: 'Object programming',
+      label: '🎯 Sui Object Model',
       items: [
+        'UID, ID và Address',
         'object-centric-model',
-        'capability-pattern',
         'dynamic-fields',
+      ],
+    },
+    {
+      type: 'category',
+      label: '🔐 Patterns nâng cao',
+      items: [
+        'capability-pattern',
         'one-time-witness',
       ],
     },
     {
       type: 'category',
-      label: 'Challenge yourself',
+      label: '🧪 Testing & Deployment',
+      items: [
+        'testing-deployment',
+      ],
+    },
+    {
+      type: 'category',
+      label: '🏗️ Dự án thực tế',
       items: [
         'my-nft-collection',
       ],
