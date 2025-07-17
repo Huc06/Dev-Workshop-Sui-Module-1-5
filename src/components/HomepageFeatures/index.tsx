@@ -2,58 +2,71 @@ import type { ReactNode } from "react";
 import clsx from "clsx";
 import Heading from "@theme/Heading";
 import styles from "./styles.module.css";
-import mascot1 from "@site/static/img/mascot1.png";
-import mascot2 from "@site/static/img/mascot2.png";
-import mascot3 from "@site/static/img/mascot3.png";
 
 type FeatureItem = {
   title: string;
   img: string;
   description: ReactNode;
+  highlights: string[];
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: "Học Move Language",
-    img: mascot1,
+    title: "Move Language",
+    img: require("@site/static/img/mascot1.png").default,
     description: (
       <>
-        Tìm hiểu ngôn ngữ lập trình Move - ngôn ngữ mạnh mẽ và an toàn để xây
-        dựng smart contracts trên Sui blockchain. Từ cơ bản đến nâng cao.
+        Ngôn ngữ lập trình được thiết kế đặc biệt cho blockchain, đảm bảo an
+        toàn và hiệu suất cao cho smart contracts.
       </>
     ),
+    highlights: ["An toàn tuyệt đối", "Hiệu suất cao", "Dễ học và sử dụng"],
   },
   {
-    title: "Xây dựng dApps",
-    img: mascot2,
+    title: "Sui Network",
+    img: require("@site/static/img/mascot2.png").default,
     description: (
       <>
-        Hướng dẫn từng bước để tạo ra các ứng dụng phi tập trung (dApps) trên
-        Sui. Từ NFT collections đến các ứng dụng DeFi phức tạp.
+        Blockchain thế hệ mới với khả năng mở rộng vô hạn, tốc độ giao dịch
+        nhanh và phí gas thấp.
       </>
     ),
+    highlights: ["297K+ TPS", "~400ms finality", "Phí gas thấp"],
   },
   {
-    title: "Tài liệu Tiếng Việt",
-    img: mascot3,
+    title: "Tài liệu Việt",
+    img: require("@site/static/img/mascot3.png").default,
     description: (
       <>
-        Tài liệu đầy đủ bằng tiếng Việt, dễ hiểu và có ví dụ thực tế. Phù hợp
-        cho cả người mới bắt đầu và developer có kinh nghiệm.
+        Hướng dẫn chi tiết bằng tiếng Việt với ví dụ thực tế, từ cơ bản đến nâng
+        cao cho mọi trình độ.
       </>
     ),
+    highlights: ["Dễ hiểu", "Ví dụ thực tế", "Cập nhật liên tục"],
   },
 ];
 
-function Feature({ title, img, description }: FeatureItem) {
+function Feature({ title, img, description, highlights }: FeatureItem) {
   return (
     <div className={clsx("col col--4")}>
-      <div className="text--center">
-        <img src={img} alt={title} className={styles.featureSvg} />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+      <div className={styles.featureCard}>
+        <div className={styles.featureImageWrapper}>
+          <img src={img} alt={title} className={styles.featureSvg} />
+        </div>
+        <div className={styles.featureContent}>
+          <Heading as="h3" className={styles.featureTitle}>
+            {title}
+          </Heading>
+          <p className={styles.featureDescription}>{description}</p>
+          <ul className={styles.featureHighlights}>
+            {highlights.map((highlight, idx) => (
+              <li key={idx} className={styles.highlightItem}>
+                <span className={styles.checkIcon}>✓</span>
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
@@ -63,6 +76,12 @@ export default function HomepageFeatures(): ReactNode {
   return (
     <section className={styles.features}>
       <div className="container">
+        <div className={styles.featuresHeader}>
+          <h2 className={styles.featuresTitle}>Tại sao chọn Sui?</h2>
+          <p className={styles.featuresSubtitle}>
+            Khám phá những tính năng độc đáo và ưu việt của Sui blockchain
+          </p>
+        </div>
         <div className="row">
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />

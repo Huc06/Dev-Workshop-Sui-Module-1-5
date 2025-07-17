@@ -11,58 +11,108 @@ import styles from "./index.module.css";
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
+    <header className={clsx("hero", styles.heroBanner)}>
       <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">
-          Tài liệu hướng dẫn phát triển Sui blockchain bằng tiếng Việt
-        </p>
-        <p className="hero__subtitle">
-          Học cách xây dựng ứng dụng phi tập trung trên Sui Network với Move
-          language
-        </p>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>
+            Xây dựng trên <span className={styles.suiHighlight}>Sui</span>
+          </h1>
+          <p className={styles.heroSubtitle}>
+            Tài liệu hướng dẫn phát triển Sui blockchain bằng tiếng Việt
+          </p>
+          <p className={styles.heroDescription}>
+            Học cách xây dựng ứng dụng phi tập trung với Move language trên Sui
+            Network - blockchain nhanh nhất, an toàn nhất và thân thiện với nhà
+            phát triển
+          </p>
 
-        {/* Learning Path Section */}
-        <div className={styles.learningPath}>
-          <h3>🚀 Bắt đầu hành trình của bạn:</h3>
-          <div className={styles.pathButtons}>
+          <div className={styles.heroActions}>
             <Link
-              className="button button--secondary button--lg margin--sm"
+              className="button button--primary button--lg"
+              to="/move-language/hello_world.move"
+            >
+              Bắt đầu xây dựng
+            </Link>
+            <Link
+              className="button button--secondary button--lg"
               to="/sui-blockchain/intro"
             >
-              📚 1. Tìm hiểu Sui Blockchain
-            </Link>
-            <Link
-              className="button button--secondary button--lg margin--sm"
-              to="/move-language/intro"
-            >
-              ⚡ 2. Học Move Language
-            </Link>
-            <Link
-              className="button button--secondary button--lg margin--sm"
-              to="/web3-frontend/intro"
-            >
-              🌐 3. Xây dựng Frontend
-            </Link>
-            <Link
-              className="button button--secondary button--lg margin--sm"
-              to="/community/intro"
-            >
-              👥 4. Tham gia Community
+              Tìm hiểu Sui
             </Link>
           </div>
         </div>
 
-        <div className={styles.quickActions}>
-          <Link
-            className="button button--primary button--lg"
-            to="/move-language/hello_world.move"
-          >
-            Viết code đầu tiên ngay! 💻
-          </Link>
+        <div className={styles.statsSection}>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>297K+</div>
+            <div className={styles.statLabel}>TPS</div>
+          </div>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>~400ms</div>
+            <div className={styles.statLabel}>Finality</div>
+          </div>
+          <div className={styles.statItem}>
+            <div className={styles.statNumber}>159M+</div>
+            <div className={styles.statLabel}>Active Accounts</div>
+          </div>
         </div>
       </div>
     </header>
+  );
+}
+
+function LearningPaths() {
+  const paths = [
+    {
+      icon: "📚",
+      title: "Tìm hiểu Sui Blockchain",
+      description: "Khám phá kiến trúc và tính năng độc đáo của Sui",
+      link: "/sui-blockchain/intro",
+      color: "blue",
+    },
+    {
+      icon: "⚡",
+      title: "Học Move Language",
+      description: "Làm chủ ngôn ngữ lập trình an toàn cho smart contracts",
+      link: "/move-language/intro",
+      color: "purple",
+    },
+    {
+      icon: "🌐",
+      title: "Xây dựng Frontend",
+      description: "Tích hợp ứng dụng web với Sui blockchain",
+      link: "/web3-frontend/intro",
+      color: "green",
+    },
+  ];
+
+  return (
+    <section className={styles.learningPaths}>
+      <div className="container">
+        <h2 className={styles.sectionTitle}>Lộ trình học tập</h2>
+        <p className={styles.sectionSubtitle}>
+          Hành trình từ người mới bắt đầu đến Sui developer chuyên nghiệp
+        </p>
+
+        <div className={styles.pathsGrid}>
+          {paths.map((path, idx) => (
+            <Link
+              key={idx}
+              to={path.link}
+              className={clsx(
+                styles.pathCard,
+                styles[`pathCard--${path.color}`]
+              )}
+            >
+              <div className={styles.pathIcon}>{path.icon}</div>
+              <h3 className={styles.pathTitle}>{path.title}</h3>
+              <p className={styles.pathDescription}>{path.description}</p>
+              <div className={styles.pathArrow}>→</div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -71,14 +121,15 @@ export default function Home() {
   return (
     <Layout>
       <Head>
-        <title>Trang chủ</title>
+        <title>Sui Hub Tiếng Việt - Tài liệu phát triển Sui Blockchain</title>
         <meta
           name="description"
-          content="Tài liệu hướng dẫn phát triển Sui blockchain bằng tiếng Việt - Học Move language và xây dựng dApps"
+          content="Tài liệu hướng dẫn phát triển Sui blockchain bằng tiếng Việt - Học Move language và xây dựng dApps trên Sui Network"
         />
       </Head>
       <HomepageHeader />
       <main>
+        <LearningPaths />
         <HomepageFeatures />
       </main>
     </Layout>

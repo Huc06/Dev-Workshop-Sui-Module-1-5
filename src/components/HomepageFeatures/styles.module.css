@@ -1,66 +1,190 @@
 .features {
-  display: flex;
-  align-items: center;
-  padding: 2rem 0;
-  width: 100%;
-  background-color: var(--ifm-background-color);
+  padding: 5rem 0;
+  background-color: var(--ifm-background-surface-color);
+}
+
+.featuresHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.featuresTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--sui-ocean);
+}
+
+[data-theme='dark'] .featuresTitle {
+  color: var(--sui-aqua);
+}
+
+.featuresSubtitle {
+  font-size: 1.1rem;
+  color: var(--ifm-color-content-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.featureCard {
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid var(--sui-border-color);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--sui-sea) 0%, var(--sui-ocean) 100%);
+}
+
+.featureCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px var(--sui-shadow-medium);
+  border-color: var(--sui-sea);
+}
+
+.featureImageWrapper {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
-  margin-bottom: 1rem;
+  height: 120px;
+  width: 120px;
   transition: transform 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
-.featureSvg:hover {
-  transform: scale(1.05);
+.featureCard:hover .featureSvg {
+  transform: scale(1.1) rotate(5deg);
 }
 
-.features .col {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  background-color: var(--ifm-card-background-color);
-  border: 1px solid rgba(192, 230, 255, 0.3);
+.featureContent {
+  text-align: center;
 }
 
-.features .col:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(1, 24, 41, 0.15);
-  border-color: #4DA2FF;
-}
-
-.features h3 {
+.featureTitle {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #011829;
+  color: var(--sui-ocean);
 }
 
-.features p {
+[data-theme='dark'] .featureTitle {
+  color: var(--sui-aqua);
+}
+
+.featureDescription {
   font-size: 1rem;
   line-height: 1.6;
-  color: rgba(1, 24, 41, 0.8);
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 1.5rem;
 }
 
-/* Dark mode specific improvements */
-[data-theme='dark'] .features .col {
-  background-color: #011829;
-  border: 1px solid rgba(77, 162, 255, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+.featureHighlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
 }
 
-[data-theme='dark'] .features .col:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  border-color: #4DA2FF;
+.highlightItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--ifm-color-content);
 }
 
-[data-theme='dark'] .features h3 {
-  color: #C0E6FF;
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: var(--sui-sea);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
-[data-theme='dark'] .features p {
-  color: rgba(192, 230, 255, 0.8);
+/* Dark mode adjustments */
+[data-theme='dark'] .featureCard {
+  background-color: var(--sui-ocean);
+  border-color: rgba(77, 162, 255, 0.2);
+}
+
+[data-theme='dark'] .featureCard:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--sui-sea);
+}
+
+[data-theme='dark'] .featureSvg {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Responsive Design */
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 4rem 0;
+  }
+
+  .featuresHeader {
+    margin-bottom: 3rem;
+  }
+
+  .featuresTitle {
+    font-size: 2rem;
+  }
+
+  .featureCard {
+    margin-bottom: 2rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .featureSvg {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .features {
+    padding: 3rem 0;
+  }
+
+  .featuresTitle {
+    font-size: 1.75rem;
+  }
+
+  .featuresSubtitle {
+    font-size: 1rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+  }
+
+  .featureSvg {
+    height: 80px;
+    width: 80px;
+  }
+
+  .featureTitle {
+    font-size: 1.25rem;
+  }
 }
